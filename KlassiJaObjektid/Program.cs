@@ -97,10 +97,8 @@ namespace KlassiJaObjektid
     {
         public string Nimi;
 
-        public Koduloom(string nimi, string liik) : base(liik)
-        {
-            Nimi = nimi;
-        }
+        public Koduloom(string nimi, string liik) : base(liik) => Nimi = nimi;
+        
 
         public override string ToString() => $"{this.Liik} {Nimi}";
     }
@@ -108,7 +106,7 @@ namespace KlassiJaObjektid
     class Koer : Koduloom, ISöödav, IComparable
     {
         public string Tõug;
-        public Koer(string nimi, string tõug = "krants") : base(nimi, "koer") { Tõug = tõug; }
+        public Koer(string nimi, string tõug = "krants") : base(nimi, "koer") => (Tõug,Nimi) = (tõug,nimi); 
 
         public int CompareTo(object obj)
         {
