@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassJaProperty", "ClassJaProperty.csproj", "{92447DAF-C129-43DB-8C16-F926FBE7247E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92447DAF-C129-43DB-8C16-F926FBE7247E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92447DAF-C129-43DB-8C16-F926FBE7247E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92447DAF-C129-43DB-8C16-F926FBE7247E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92447DAF-C129-43DB-8C16-F926FBE7247E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE885DEE-1925-4B64-B40F-C97C62EDB4E1}
+	EndGlobalSection
+EndGlobal
