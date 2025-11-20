@@ -10,6 +10,7 @@ namespace ThisAndExtension
     {
         static void Main(string[] args)
         {
+            // uus näide 
         }
     }
 
