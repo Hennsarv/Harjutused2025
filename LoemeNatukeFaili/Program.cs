@@ -57,7 +57,7 @@ namespace LoemeNatukeFaili
                 {
                     //Catid = x[nimedDict["CategoryId"]].TryToInt(), //      TryTo<int>(int.TryParse), 
                     Catid = x.TryColumn("CategoryId", nimedDict).TryToInt(),      // sama mis eelmine kasutades extensionit
-                    Nimetus = x.TryColumn("ProductNimi", nimedDict),
+                    Nimetus = x.TryColumn("ProductName", nimedDict),
                     //Hind = x[iHind].TryToDec(), //     decimal.TryParse(x[iHind], out decimal _hind) ? _hind : 0,
                     //Kogus = decimal.TryParse(x[iKogus], out decimal _kogus) ? _kogus : 0,
                     Hind = x.TryColumn("UnitPrice", nimedDict).TryToDec(),
@@ -131,8 +131,8 @@ namespace LoemeNatukeFaili
         public static string TryColumn(this string[] row, string colName, IDictionary<string, int> header, string def = "")
             => row == null || header == null ? def
             //: row[header[colName]].ToString()                                               // (1) NonSafe
-            : row[header.TryGetValue(colName, out int _i) ? _i : 0]                       // (2) HalfSafe
-            //: row.ElementAtOrDefault(header.TryGetValue(colName, out int _i) ? _i : 0)    // (3) Safe
+            //: row[header.TryGetValue(colName, out int _i) ? _i : 0]                       // (2) HalfSafe
+            : row.ElementAtOrDefault(header.TryGetValue(colName, out int _i) ? _i : 0)    // (3) Safe
             
             // (1) annab vea, kui veerunimi on vigane 
             // (2) annab vea, kui rida on vigane (liiga lühike vms)
