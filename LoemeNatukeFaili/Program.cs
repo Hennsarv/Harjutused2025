@@ -21,16 +21,23 @@ namespace LoemeNatukeFaili
             int iNimetus = 0;
             int iHind = 0;
             int iKogus = 0;
-            int iCatid = 0;
+            //int iCatid = 0;
             for (int j = 0; nimed.Length > j; j++) 
             {
                 if (nimed[j].Contains("ProductName")) iNimetus = j;
                 if (nimed[j].Contains("UnitPrice")) iHind = j;
                 if (nimed[j].Contains("UnitsInStock")) iKogus = j;
-                if (nimed[j].Contains("Category")) iCatid= j;
+                //if (nimed[j].Contains("Category")) iCatid= j;
             }
+            int index = 0;
+            var nimedDict = read[0]
+                .Replace(@"""", "")
+                .Split(',')
+                .ToDictionary(x => x, x => index++, StringComparer.OrdinalIgnoreCase);
+            foreach (var d in nimedDict) Console.WriteLine(d);
 
-            decimal summa = 0;
+
+            //decimal summa = 0;
             //Console.WriteLine("Toode"+new string(' ', 55)+"Hind     "+ "Kogus     ");
             var tooteList = read.Skip(1)
                 .Where(x => x.Length > 5)
@@ -38,7 +45,7 @@ namespace LoemeNatukeFaili
                 .Select(x => x.Split(';'))
                 .Select(x => new
                 {
-                    Catid = int.TryParse(x[iCatid], out int _cat) ? _cat : 0, 
+                    Catid = int.TryParse(x[nimedDict["CategoryId"]], out int _cat) ? _cat : 0, 
                     Nimetus = x[iNimetus],
                     Hind = decimal.TryParse(x[iHind], out decimal _hind) ? _hind : 0,
                     Kogus = decimal.TryParse(x[iKogus], out decimal _kogus) ? _kogus : 0,
