@@ -44,7 +44,7 @@ namespace DBDemo
             var lq = q1.ToList();
             lq.ForEach(x => Console.WriteLine(x));
 
-            var byCatId = lq.GroupBy(x => x.CategoryID);
+            var byCatId = lq.ToLookup(x => x.CategoryID);
 
             foreach(var cat in byCatId.OrderBy(x => x.Key.HasValue ?  x.Key : 9999999) ) 
             {
