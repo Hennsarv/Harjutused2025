@@ -14,12 +14,12 @@ namespace DBDemo
         static void Main(string[] args)
         {
 
-            var t = new { Nimi = "Henn", Vanus = 70, Palk = 1000M };
+            //var t = new { Nimi = "Henn", Vanus = 70, Palk = 1000M };
 
-            Console.WriteLine(t.GetType().Name);
+            //Console.WriteLine(t.GetType().Name);
 
-            var t2 = new { Nimi = "Henn", Vanus = 70, PalkF = 1000F };
-            Console.WriteLine(t2);
+            //var t2 = new { Nimi = "Henn", Vanus = 70, PalkF = 1000F };
+            //Console.WriteLine(t2);
 
 
             NorthwindEntities1 db = new NorthwindEntities1();
@@ -35,14 +35,27 @@ namespace DBDemo
             var q1 = db.Products
                 .Where(x => x.UnitPrice > 20M)
                 .OrderBy(x => x.UnitPrice)
-                .Select(x => x.ProductName);
-
+                .Select(x => new { x.ProductName, x.CategoryID, x.UnitPrice });
+                ;
 
             Console.WriteLine(q);
             Console.WriteLine(q1);
             //
-            var lq = q.ToList();
-            //lq.ForEach(x => Console.WriteLine(x));
+            var lq = q1.ToList();
+            lq.ForEach(x => Console.WriteLine(x));
+
+            var byCatId = lq.GroupBy(x => x.CategoryID);
+
+            foreach(var cat in byCatId.OrderBy(x => x.Key.HasValue ?  x.Key : 9999999) ) 
+            {
+                Console.WriteLine($"Categooria nr {cat.Key}");
+                foreach(var pro in cat)
+                    Console.WriteLine(pro);
+
+                Console.WriteLine("kategooria lõppes\n\n");
+            }
+
+
 
             //            //db.Database.Log = System.Console.WriteLine;
             //            var q = db.Products.Where( x => !x.Discontinued)
