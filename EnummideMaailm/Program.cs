@@ -11,28 +11,24 @@ namespace EnummideMaailm
     {
         static void Main(string[] args)
         {
-            Mast trump = Mast.Pada;
-            Console.WriteLine(trump);
-            Enum.GetNames(typeof(Mast)).ToList().ForEach(x => Console.WriteLine(x));
-
-            int kaardiNr = 17;
-            Console.WriteLine($"{(Mast)(kaardiNr/13)} {(Kaart)(kaardiNr%13)}");
-
-            Omadus omadus = (Omadus)31;
-
-            omadus ^= Omadus.Hiilgav;
-            omadus ^= (Omadus.Punane | Omadus.Suur);
-
-            omadus = Omadus.Sõjaveteran ^ Omadus.Puust;
-
             Random R = new Random();
-            
+            var kaardid = Enumerable.Range(0, 52).OrderBy(x => R.NextDouble());
+            int ix = 0;
+            Console.WriteLine(kaardid
+                .Select(x => $"\t{(Mast)(x/13)} {(Kaart)(x%13)} {(ix++%4 == 3 ? "\n":"")}")
+                .Join(""));
 
-            //var vastus = MessageBox.Show("Kuidas tund kulgeb", "Tere!", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error); 
+            ix = 0;
+            var käed = kaardid.ToLookup(x => (ix++)%4).Select(x => x.OrderBy(y => y).Select(y => y.AsCard()).ToArray()).ToArray();
 
-            
-
-            Console.WriteLine((int)StringSplitOptions.None);
+            for (int i = 0; i < 13; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    Console.Write($"\t{käed[j][i]}");
+                }
+                Console.WriteLine();
+            }
 
         }
     }
@@ -41,4 +37,12 @@ namespace EnummideMaailm
     enum Kaart { Kaks , Kolm, Neli, Viis, Kuus, Seitse, Kaheksa, Üheksa, Kümme, Soldat, Emand, Kuningas, Äss}
 
     [Flags] enum Omadus { Punane = 1, Suur = 2, Puust = 4, Kolisev = 8, Hiilgav = 16, Sõjaveteran = 23}
+
+    static class E
+    {
+        public static string Join<T>(this IEnumerable<T> mass, string sep) => string.Join(sep, mass);
+
+        public static string AsCard(this int k) => $"{(Mast)(k/13)} {(Kaart)(k%13)}";
+    }
+
 }
