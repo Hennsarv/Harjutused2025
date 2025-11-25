@@ -26,7 +26,7 @@ namespace MVCJSoniga.Controllers
         // GET: Inimesed/Details/5
         public ActionResult Details(int id)
         {
-            return View(inimesed.Where(x => x.Id == id).FirstOrDefault());
+            return View(inimesed.FirstOrDefault(x => x.Id == id));
         }
 
         // GET: Inimesed/Create
