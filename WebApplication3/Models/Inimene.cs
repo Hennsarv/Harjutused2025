@@ -22,8 +22,8 @@ namespace WebApplication3.Models
             if (Inimesed.Count == 0)
             {
                 Inimesed.Add(new Inimene { Nimi = "Henn", Vanus = 70 });
-                Inimesed.Add(new Inimene { Nimi = "Ants", Vanus = 60 });
-                Inimesed.Add(new Inimene { Nimi = "Peeter", Vanus = 50 });
+                Inimesed.Add(new Inimene { Nimi = "Henry", Vanus = 47 });
+                Inimesed.Add(new Inimene { Nimi = "Kristjan", Vanus = 45 });
                 ;
             }
         }

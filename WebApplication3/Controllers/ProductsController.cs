@@ -7,20 +7,66 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication3.Models;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+
+namespace WebApplication3.Models
+{
+    [MetadataType(typeof(ProductMetadata))]
+    partial class Product
+    {
+        public decimal Laoseis => (this.UnitPrice.HasValue ? this.UnitPrice.Value : 0) * (this.UnitsInStock.HasValue ? this.UnitsInStock.Value : 0) ;
+    }
+    
+    public class ProductMetadata
+    {
+        [Display(Name ="Tootenimi")]
+        public string ProductName { get; set; }
+    }
+
+    partial class northwindEntities1
+    {
+        public northwindEntities1(string pwd)
+    : base("name=northwindEntities1")
+        {
+            var conn = (System.Data.SqlClient.SqlConnection)this.Database.Connection;
+            var cs = new System.Data.SqlClient.SqlConnectionStringBuilder(conn.ConnectionString);
+            cs.Password= pwd;
+            conn.ConnectionString = cs.ToString();
+        }
+    }
+}
+
 
 namespace WebApplication3.Controllers
 {
-    
 
-
-    public class ProductsController : Controller
+    public class ProductsController : MyController
     {
-        private northwindEntities1 db = new northwindEntities1("Pa$$w0rd");
+        //private northwindEntities1 db = new northwindEntities1("Pa$$w0rd");
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string sortby = "ProductId", string direction = "Up")
         {
-            return View(db.Products.ToList());
+            //var products = db.Products.ToList().OrderBy(x => x.ProductID); //.ToList();
+
+            ViewBag.sortby = sortby;
+            ViewBag.direction = direction;
+
+            var sort = sortby+direction;
+
+            var products = db.Products;  //.OrderBy(x => x)   .AsEnumerable();
+                
+            var sortedproducts =
+                  sort == "UnitPriceUp" ? products.OrderBy(x => x.UnitPrice)
+                : sort == "ProductNameUp" ? products.OrderBy(x => x.ProductName)
+                :  sort == "UnitPriceDown" ? products.OrderByDescending(x => x.UnitPrice)
+                : sort == "ProductNameDown" ? products.OrderByDescending(x => x.ProductName)
+                : products.OrderBy(x => x.ProductID);
+
+
+            return View(sortedproducts);
         }
 
         // GET: Products/Details/5

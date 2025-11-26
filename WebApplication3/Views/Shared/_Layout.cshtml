@@ -24,6 +24,8 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Inimesed", "Index", "Inimesed")</li>
+                    <li>@Html.ActionLink("Tooted", "Index", "Products")</li>
+
                 </ul>
             </div>
         </div>
@@ -38,6 +40,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Content/Omad/Minu.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

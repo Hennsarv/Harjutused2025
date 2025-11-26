@@ -7,17 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 namespace WebApplication3.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Product
     {
         public int ProductID { get; set; }
-        [Display(Name ="Toote nimi")]
         public string ProductName { get; set; }
         public Nullable<int> SupplierID { get; set; }
         public Nullable<int> CategoryID { get; set; }
@@ -28,5 +25,7 @@ namespace WebApplication3.Models
         public Nullable<short> ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
         public int State { get; set; }
+    
+        public virtual Category Category { get; set; }
     }
 }

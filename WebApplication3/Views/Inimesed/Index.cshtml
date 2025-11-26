@@ -22,8 +22,12 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nimi)
+        <td data-id="@item.Id" data-class="Inimene" data-field="Nimi">
+            @*@Html.DisplayFor(modelItem => item.Nimi)*@
+            <div class="editview">@Html.DisplayFor(modelItem => item.Nimi)</div>
+            <div class="viewedit">
+                <input type="text" value="@item.Nimi" />
+            </div>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Vanus)

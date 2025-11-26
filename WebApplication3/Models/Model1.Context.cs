@@ -12,17 +12,12 @@ namespace WebApplication3.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.SqlClient;
-
+    
     public partial class northwindEntities1 : DbContext
     {
-        public northwindEntities1(string pwd)
+        public northwindEntities1()
             : base("name=northwindEntities1")
         {
-            var conn = (System.Data.SqlClient.SqlConnection)this.Database.Connection;
-            var sb = new SqlConnectionStringBuilder(conn.ConnectionString);
-            sb.Password= pwd;
-            conn.ConnectionString= sb.ToString();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,5 +26,7 @@ namespace WebApplication3.Models
         }
     
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     }
 }

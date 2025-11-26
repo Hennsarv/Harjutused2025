@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.roheline,
+.minunupp
+{color: green;}
+
+.minunupp,
+.sortnupp,
+.editview
+{cursor:pointer;} 
+
+.sortnupp::after {
+    content: "▾";            /* või "▲", "▼", "⇅", "⮟" jne */
+    display: inline-block;
+    margin-left: 0.3em;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.viewedit {display: none;}
+
