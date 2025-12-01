@@ -96,11 +96,14 @@ namespace WebApplication3.Controllers
 
                 if(file != null && file.ContentLength > 0)
                 {
-                    var ms = new System.IO.MemoryStream();
-                    file.InputStream.CopyTo(ms);
-                    Category cat = db.Categories.Find(category.CategoryID);
-                    cat.Picture = ms.ToArray();
-                    db.SaveChanges();
+                    using(var ms = new System.IO.MemoryStream())
+                    { 
+                        file.InputStream.CopyTo(ms);
+                        Category cat = db.Categories.Find(category.CategoryID);
+                        cat.Picture = ms.ToArray();
+                        db.SaveChanges();
+                    }
+                    
                 }
 
 
@@ -108,6 +111,26 @@ namespace WebApplication3.Controllers
             }
             return View(category);
         }
+
+        [HttpPost]
+        public ActionResult ChangePicture(int id, HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                using (var ms = new System.IO.MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    Category cat = db.Categories.Find(id);
+                    cat.Picture = ms.ToArray();
+                    db.SaveChanges();
+                }
+
+            }
+
+            return null;
+
+        }
+
 
         // GET: Categories/Delete/5
         public ActionResult Delete(int? id)

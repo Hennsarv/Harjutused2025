@@ -31,8 +31,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            <img height="100" src="@Url.Action("Picture", new { id = item.CategoryID })" />
+        <td class="pildigrupp" data-id="@item.CategoryID">
+
+            <div>
+                @*<form action="@Url.Action("ChangePicture", new { id = item.CategoryID })" method="post" enctype="multipart/form-data">*@
+                    <img class="piltise vajutatavpilt" height="100" src="@Url.Action("Picture", new { id = item.CategoryID })" />
+                    <input type="file" name="file" class="pildinupp" />
+                    <button class="vahetapilt">Vaheta pilt</button>
+                @*</form>*@
+            </div>     
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |

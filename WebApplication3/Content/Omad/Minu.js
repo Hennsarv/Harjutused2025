@@ -78,10 +78,39 @@ $(document).on('change', '.pildinupp' , function () {
     if (file) {
         var url = URL.createObjectURL(file);
         $(this).closest('.pildigrupp').find('.piltise').attr('src', url);
+        $(this).closest('.pildigrupp').find('.vahetapilt').show();
     }
 });
 
 $(document).on('click', '.vajutatavpilt', function () {
     $(this).closest('.pildigrupp').find('.pildinupp').click();
+});
+
+$(document).on('click', '.vahetapilt', function () {
+    var $pg = $(this).closest('.pildigrupp');
+    if ($pg && $pg.length > 0) {
+        var d = $pg.data();
+        var id = d.id;
+        var file = $pg.find('input')[0].files[0];
+        var fd = new FormData();
+        fd.append('id', id);
+        fd.append('file', file);
+        $.ajax({
+            url: '/Categories/ChangePicture',
+            type: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function () {
+                $pg.find('.vahetapilt').hide();
+
+            },
+            error: function () {
+                $pg.find('.vahetapilt').css({ 'background-color': 'red' }).text("MISKI VIGA!");
+            }
+        });
+
+    }
+
 });
 
