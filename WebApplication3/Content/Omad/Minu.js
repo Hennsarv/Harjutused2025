@@ -72,3 +72,16 @@ $(document).on('keydown', '.viewedit', function (e) {
 
     }
 })
+
+$(document).on('change', '.pildinupp' , function () {
+    var file = this.files[0];
+    if (file) {
+        var url = URL.createObjectURL(file);
+        $(this).closest('.pildigrupp').find('.piltise').attr('src', url);
+    }
+});
+
+$(document).on('click', '.vajutatavpilt', function () {
+    $(this).closest('.pildigrupp').find('.pildinupp').click();
+});
+

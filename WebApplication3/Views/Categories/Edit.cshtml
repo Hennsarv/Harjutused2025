@@ -33,14 +33,14 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group pildigrupp">
             @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
            
-            <div class="col-md-10">
-                <img src="@Url.Action("Picture", new { id = Model.CategoryID })" />
+            <div class="col-md-10 vajutatavpilt">
+                <img src="@Url.Action("Picture", new { id = Model.CategoryID })" id="preview" height="120" class="piltise"/>
             </div>
 
-            <input type="file" name="file" id="file" />
+            <input type="file" name="file" id="file" class="pildinupp" />
 
         </div>
 
