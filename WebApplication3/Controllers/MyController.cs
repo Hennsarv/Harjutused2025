@@ -11,7 +11,7 @@ namespace WebApplication3.Controllers
     {
         internal static List<Category> categories = null;
 
-        public static Category Category(this int categoryId) => categories.FirstOrDefault(x => x.CategoryID == categoryId);
+        public static Category Category(this int categoryId) => (_ = categories).FirstOrDefault(x => x.CategoryID == categoryId);
 
     }
 

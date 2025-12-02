@@ -78,6 +78,9 @@ namespace WebApplication3.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+
+            var Category = product.CategoryID?.Category();
+
             if (product == null)
             {
                 return HttpNotFound();
