@@ -26,6 +26,8 @@ namespace Dynaamikud
 
             Tasku.Nimi = "Henn";
             Tasku.Vanus = 70;
+            Tasku["Palk"] = 5000;
+            Tasku.Palk = 5000;
 
 
 
@@ -55,6 +57,8 @@ namespace Dynaamikud
             laps.Nimi = "Kristofer";
             Console.WriteLine(laps);
 
+            var keda = "Isa";
+            var see = laps[keda];
 
         }
     }
@@ -87,17 +91,57 @@ namespace Dynaamikud
             return true;
         }
 
+        public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
+        {
+            var key = indexes[0]?.ToString();
+            switch (bag)
+            {
+                case IDictionary<string, object> d:
+                    result = d.ContainsKey(key) ? d[key] : null;
+                    return true;
+                default:
+                    result = bag[key];
+                    return true;
+            }
+
+        }
+
+        public override bool TrySetIndex(SetIndexBinder binder, object[] indexes, object value)
+        {
+            var key = indexes[0]?.ToString();
+
+            switch (bag)
+            {
+                case IDictionary<string, object> d:
+                    d[key] = value;
+                    return true;
+
+                default:
+                    bag[key] = value;
+                    return true;
+            }
+        }
+
+
 
 
     }
 
     class Inimene
     {
+        string _miski;
+
         public string Nimi { get; set; }
         public int Vanus { get; set; }
 
         public Inimene Isa { get; set; }
         public Inimene Ema { get; set; }
+
+        public string Miski
+        {
+            get { return _miski; }
+            set { _miski = value; }
+        }
 
         public Inimene() { }
 
@@ -111,6 +155,18 @@ namespace Dynaamikud
 
         public override string ToString() => $"inimene {Nimi} isa {Isa.Nimi} ema {Ema.Nimi}";
 
+        public Inimene this[string vanem] { get
+            { return vanem == null ? null : vanem == "Isa" ? Isa : vanem == "Ema" ? Ema : null; }
+
+            set { 
+                switch(vanem)
+                {
+                    case "Isa": this.Isa = value; break;
+                    case "Ema": this.Ema = value; break;
+                }
+
+            }
+        }
 
     }
 
