@@ -135,6 +135,7 @@
     <Compile Include="Controllers\InimesedController.cs" />
     <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\TootedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +243,11 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Tooted\Create.cshtml" />
+    <Content Include="Views\Tooted\Delete.cshtml" />
+    <Content Include="Views\Tooted\Details.cshtml" />
+    <Content Include="Views\Tooted\Edit.cshtml" />
+    <Content Include="Views\Tooted\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

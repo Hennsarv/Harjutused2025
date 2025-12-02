@@ -1,4 +1,6 @@
-﻿$(document).on("click", ".minunupp", function () {
+﻿
+
+$(document).on("click", ".minunupp", function () {
     $(this).css({ color: 'red' });
 })
 
